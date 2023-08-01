@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  data-extractor:
+  # building docker images for data extractor
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    image: birth_certificate_test
+    # command: bash -c "sleep 20000"
+    restart: unless-stopped
+    container_name: birth_test
+    volumes:
+      - ./outputs:/rpa/outputs
+
+    env_file:
+      - ./scb_data_extractor/.env #load environment variables
+    depends_on:
+      - selenium-test
+
+
+  selenium-node-1:
+    image: ferntech/selenium:v4
+    container_name: selenium-test
+    volumes:
+      - /dev/shm:/dev/shm
+      - ./outputs/images:/home/seluser/Downloads
+    ports:
+      - 4444:4444
+      - 5900:5900
+    shm_size: 2g
+
+  

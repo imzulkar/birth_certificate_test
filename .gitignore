@@ -1,0 +1,5 @@
+# python gitignore files
+*.pyc
+*.pyo
+__pycache__/
+__pycache__/*
