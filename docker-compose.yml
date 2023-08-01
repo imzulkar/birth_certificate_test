@@ -5,7 +5,7 @@ services:
   # building docker images for data extractor
     build:
       context: ./
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./Dockerfile
     image: birth_certificate_test
     # command: bash -c "sleep 20000"
     restart: unless-stopped
@@ -14,9 +14,9 @@ services:
       - ./outputs:/rpa/outputs
 
     env_file:
-      - ./scb_data_extractor/.env #load environment variables
+      - ./.env #load environment variables
     depends_on:
-      - selenium-test
+      - selenium-node-1
 
 
   selenium-node-1:
